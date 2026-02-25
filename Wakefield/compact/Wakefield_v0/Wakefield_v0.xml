@@ -1,0 +1,204 @@
+<lccdd>
+  <info name="Wakefield_v0"
+	title="Wakefield detector concept for sqrt(s) = 10 TeV e+e- or e-e- collisions, based on CLIC SiD tracker geometry, and MAIA_v0 calorimeter and muon spectrometer"
+	author="Angira Rastogi"
+	url="https://mcdwiki.docs.cern.ch/"
+	status="development"
+	version="0">
+    <comment>First import</comment>
+  </info>
+
+  <includes>
+    <gdmlFile  ref="elements.xml"/>
+    <gdmlFile  ref="materials.xml"/>
+  </includes>
+
+  <define>
+    <constant name="world_side"             value="30000*mm"/>
+    <constant name="world_x"                value="world_side"/>
+    <constant name="world_y"                value="world_side"/>
+    <constant name="world_z"                value="world_side"/>
+
+    <constant name="env_safety" value="0.1*mm"/>
+
+    <comment> suggested naming convention:
+
+    main parameters (see definitions in http://cern.ch/go/r9mZ):
+    
+    DET_rmin            : inner radius of tube like envelope  ( inscribed cylinder )
+    DET_rmax            : outer radius of tube like envelope  ( inscribed cylinder )
+    DET_half_length     : half length along z axis
+    DET_zmin            : smallest absolute value on z-axis
+    DET_zmax            : largest  absolute value on z-axis
+    DET_inner_symmetry  : number of sides on the inside  ( 0 for tube )
+    DET_outer_symmetry  : number of sides on the outside ( 0 for tube )
+    DET_symmetry        : number of sides if the same in- and outside
+    DET_inner_phi0      : optional rotation of the inner polygon ( in r-phi plane )
+    DET_outer_phi0      : optional rotation of the outer polygon ( in r-phi plane )
+    
+    additional parameters for cutting away volumes/shapes use one of the above with a number
+    appended and/or an extra specifiaction such as cone ( for a cut away cone )
+    
+    DET_rmin_1
+    DET_rmin_2
+    DET_cone_zmin
+    DET_cone_zmax
+    
+    </comment>    
+
+    <constant name="SiTracker_outer_radius" value="1235.0*mm"/>
+    <constant name="SiTracker_inner_radius" value="206.00*mm"/>
+    <constant name="SiTracker_zmax" value="1637.0*mm"/><!-- half-length -->
+    <constant name="SiTracker_EndcapLayers" value="4"/>
+    <constant name="SiTracker_BarrelLayers" value="SiTracker_EndcapLayers + 1"/>
+
+    <constant name="CrossingAngle"          value="0.0*rad"/>
+
+    <constant name="DetID_NOTUSED"          value="0"/>
+
+    <!-- Detector IDs -->
+    
+    <constant name="DetID_ECal_Barrel"    value="20"/>
+    <constant name="DetID_ECal_Endcap"    value="29"/>
+    
+    <constant name="DetID_HCAL_Barrel"    value="10"/>
+    <constant name="DetID_HCAL_Endcap"    value="11"/>
+
+    <constant name="DetID_Yoke_Barrel"      value="13"/>
+    <constant name="DetID_Yoke_Endcap"      value="14"/>
+
+
+    <constant name="Solenoid_inner_radius"      value="1500*mm"/>
+    <constant name="SolenoidVacuumTank_thickness" value="30.*mm"/>
+    <constant name="SolenoidCoil_thickness"     value="296.7*mm"/>        
+    <constant name="Solenoid_half_length"       value="2307*mm"/>
+
+    <constant name="ECalBarrel_inner_radius"    value="1857*mm"/>
+    <constant name="ECalBarrel_outer_radius"    value="2124.5*mm"/>
+    <constant name="ECalBarrel_half_length"     value="2307*mm"/>
+    <constant name="ECalBarrel_symmetry"        value="12"/>
+
+    <constant name="ECalEndcap_inner_radius"    value="310*mm"/>
+    <constant name="ECalEndcap_outer_radius"    value="ECalBarrel_outer_radius"/>
+    <constant name="ECalEndcap_min_z"           value="2307*mm + 3*env_safety"/>
+    <constant name="ECalEndcap_max_z"           value="2574.5*mm + 3*env_safety"/>
+    <constant name="ECalEndcap_outer_symmetry"  value="12"/>
+    <constant name="ECalEndcap_inner_symmetry"  value="12"/>
+
+    <constant name="tracking_region_radius" value="ECalBarrel_inner_radius - 10*env_safety"/>
+    <constant name="tracking_region_zmax" value="ECalEndcap_min_z - 10*env_safety"/>    
+    <constant name="tracker_region_rmax" value="tracking_region_radius"/>  
+    <constant name="tracker_region_zmax" value="tracking_region_zmax"/>
+
+    <constant name="VXD_CF_sensor" value="0.026*cm"/>
+    <constant name="VXD_CF_support" value="0.05*cm"/>
+    <constant name="bp_cone_slope" value="(8.96-1.20)/(185-6.25)"/>
+    
+    <constant name="HCalBarrel_inner_radius"    value="2126.0*mm"/>
+    <constant name="HCalBarrel_outer_radius"    value="4113.5*mm"/>
+    <constant name="HCalBarrel_half_length"     value="2574.5*mm"/>
+    <constant name="HCalBarrel_symmetry"        value="12"/>
+
+    <constant name="HCalEndcap_inner_steps"     value="5"/>
+    <constant name="HCalEndcap_inner_radius"    value="310*mm"/>
+    <constant name="HCalEndcap_inner_radius2"   value="450*mm"/>
+    <constant name="HCalEndcap_outer_radius"    value="HCalBarrel_outer_radius"/>
+    <constant name="HCalEndcap_min_z"           value="2575.5*mm + 3*env_safety"/>
+    <constant name="HCalEndcap_max_z"           value="4600*mm"/>
+    <constant name="HCalEndcap_symmetry"        value="12"/>
+    <constant name="HCalEndcap_zcutout"         value="204.48824*cm"/>
+    
+    <constant name="YokeBarrel_inner_radius"    value="4150*mm"/>
+    <constant name="YokeBarrel_outer_radius"    value="5895*mm"/>
+    <constant name="YokeBarrel_half_length"     value="HCalEndcap_max_z + 3*env_safety"/>
+    <constant name="YokeBarrel_symmetry"        value="12"/>
+
+    <constant name="YokeEndcap_inner_radius"    value="450*mm"/>
+    <constant name="YokeEndcap_inner_radius2"   value="575*mm"/>
+    <constant name="YokeEndcap_outer_radius"    value="YokeBarrel_outer_radius"/>
+    <constant name="YokeEndcap_min_z"           value="YokeBarrel_half_length"/>
+    <constant name="YokeEndcap_max_z"           value="6200*mm"/>
+    <constant name="YokeEndcap_outer_symmetry"  value="12"/>
+    <constant name="YokeEndcap_inner_symmetry"  value="0"/>
+
+    <constant name="ECal_cell_size"             value="5.1*mm"/>
+    <constant name="HCal_cell_size"             value="3.0*cm"/>
+    <constant name="Yoke_cell_size"             value="3.0*cm"/>
+    
+
+    <constant name="GlobalTrackerReadoutID"     type="string" value="system:5,side:-2,layer:6,module:11,sensor:8"/>
+    <constant name="GlobalCalorimeterReadoutID" type="string" value="system:5,side:-2,module:8,stave:4,layer:9,submodule:4,x:32:-16,y:-16"/>
+  </define>
+
+  <limits>
+    <limitset name="cal_limits">
+      <limit name="step_length_max" particles="*" value="5.0" unit="mm" />
+    </limitset>
+  </limits>
+
+  <regions>
+    <region name="BeampipeRegion"            />
+    <region name="SiVertexBarrelRegion"        />
+    <region name="SiVertexEndcapRegion"        />
+    <region name="SiTrackerBarrelRegion"  />
+    <region name="SiTrackerEndcapRegion"  />
+    <region name="SiTrackerForwardRegion"  />
+  </regions>
+
+  <display>
+    <vis name="BeampipeVis" r="0.7734375" g="0.8671875" b="0.99609375" />
+    <vis name="SiVertexBarrelVis" r="0.5" g="0.7" b="0.4" />
+    <vis name="SiVertexEndcapVis" r="0.5" g="0.7" b="0.4" />
+    <vis name="SiTrackerForwardVis" r="0.8" g="0.1" b="0.1" />
+    <vis name="SiTrackerBarrelVis" r="0.8" g="1.0" b="0.1" />
+    <vis name="SiTrackerEndcapVis" r="0.0" g="0.25" b="0.53" />
+    
+    <vis name="ECALVis"    alpha="1.0" r="0.04"  g="0.21"    b="0.62"  showDaughters="true"  visible="true"/>
+    <vis name="HCALVis"    alpha="1.0" r="0.93"  g="0.62"    b="0.02"  showDaughters="true"  visible="true"/>
+    <vis name="SOLVis"     alpha="1.0" r="0.36"  g="0.78"    b="0.69"  showDaughters="true"  visible="true"/>
+    <vis name="YOKEVis"    alpha="1.0" r="0.88"  g="0.21"    b="0.09"  showDaughters="true"  visible="true"/>
+    <vis name="SupportVis" alpha="1.0" r="0.2"   g="0.2"     b="0.2"   showDaughters="false" visible="false"/>
+  </display>
+
+  <include ref="${DD4hepINSTALL}/DDDetectors/compact/detector_types.xml"/>
+
+  <include ref="Beampipe.xml"/>
+
+  <comment>Trackers</comment> 
+  <include ref="SiVertexBarrel.xml"/>
+  <include ref="SiVertexEndcap_o2_v02.xml"/>
+
+  <include ref="SiTrackerBarrel_o2_v02_00.xml"/>
+  <include ref="SiTrackerEndcap_o2_v02_01.xml"/>
+  <include ref="SiTrackerForward_o2_v02_00.xml"/>
+
+  <include ref="Solenoid_o1_v01_01.xml"/>
+
+  <include ref="ECalBarrel_o2_v01_02.xml"/>
+  <include ref="ECalEndcap_o2_v01_02.xml"/>
+
+  <include ref="HCalBarrel_o1_v01_01.xml"/>
+  <include ref="HCalEndcap_o1_v01_01.xml"/>
+
+  <include ref="YokeBarrel_o1_v01_01.xml"/>
+  <include ref="YokeEndcap_o1_v01_01.xml"/>
+
+  <plugins>
+    <plugin name="DD4hepVolumeManager"/>
+    <plugin name="InstallSurfaceManager"/>
+    <plugin name="lcgeo_LinearSortingPolicy"/>
+
+  </plugins>
+
+  <fields>
+    <field name="GlobalSolenoid" type="solenoid"
+	   inner_field="5.0*tesla"
+	   outer_field="-0.936941*tesla"
+	   zmax="Solenoid_half_length-SolenoidVacuumTank_thickness"
+	   inner_radius="Solenoid_inner_radius+SolenoidVacuumTank_thickness + SolenoidCoil_thickness/2"
+	   outer_radius="HCalBarrel_outer_radius">
+    </field>
+  </fields>
+
+</lccdd>
+

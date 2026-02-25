@@ -1,0 +1,11 @@
+###################################################################################################
+#
+#  lcgeo
+#
+#  Wakefield detector model(s) based on DD4hep & Geant4
+#
+#  A. Rastogi, LBNL, 2026
+#
+###################################################################################################
+
+This directory holds the XML (and other) Wakefield-acceleration-based collider specific configurations. 

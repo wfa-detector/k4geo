@@ -1,0 +1,1 @@
+Based on `SiD_o3_v02` tracker and `MAIA_v0` calorimeter and muon system
