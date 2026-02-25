@@ -1,6 +1,6 @@
 <lccdd>
   <info name="Wakefield_v0"
-	title="Wakefield detector concept for sqrt(s) = 10 TeV e+e- or e-e- collisions, based on CLIC SiD tracker geometry, and MAIA_v0 calorimeter and muon spectrometer"
+	title="Wakefield detector concept for sqrt(s) = 10 TeV e+e- or e-e- collisions, based on ILC SiD_o3_v02 beampipe + vertex + tracker geometry, and MAIA_v0 calorimeters and muon spectrometer"
 	author="Angira Rastogi"
 	url="https://mcdwiki.docs.cern.ch/"
 	status="development"
